@@ -2,55 +2,49 @@
 
 class Controller
 {
-    /**
-     * @param $model
-     * @return mixed|void
-     */
-    public function model($model) {
+    public function model($model)
+    {
         if ($this->isModelExists($model)) {
-            require_once ('../app/models/' . $model . '.php');
+            require_once('../app/models/' . $model . '.php');
             return new $model();
         } else {
             die('Model does not exist');
         }
     }
 
-    /**
-     * @param $view
-     * @param $data
-     * @return void
-     */
-    public function view($view, $data = []) {
+    public function view($view, array $data = []): void
+    {
         if ($this->isViewExists($view)) {
-            require_once ('../app/views/' . $view . '.php');
+            require_once('../app/views/' . $view . '.php');
         } else {
             die('View does not exist');
         }
     }
 
-    /**
-     * @param $view
-     * @return bool
-     */
-    private function isViewExists($view) {
+    private function isViewExists($view): bool
+    {
         return file_exists('../app/views/' . $view . '.php');
     }
 
-    /**
-     * @param $model
-     * @return bool
-     */
-    private function isModelExists($model) {
+    private function isModelExists($model): bool
+    {
         return file_exists('../app/models/' . $model . '.php');
     }
 
-    /**
-     * @param $url
-     * @return void
-     */
-    protected function redirect($url) {
+    protected function redirect($url): void
+    {
         header('Location: ' . $url);
-        exit();
+    }
+
+    protected function retrievePostData(): array
+    {
+        return $_POST;
+    }
+
+    protected function retrieveGetData(): array
+    {
+        unset($_GET['url']);
+        return $_GET;
     }
 
 }

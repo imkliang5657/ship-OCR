@@ -6,6 +6,6 @@ const DB_NAME = 'ship';
 const DB_USER = 'root';
 const DB_PASS = '';
 
-define("APPROOT", dirname(dirname(__FILE__)) . '/');
+define("APPROOT", dirname(__FILE__, 2) . '/');
 const URLROOT = 'http://localhost/public';
 const SITENAME = '測試系統';

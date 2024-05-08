@@ -1,14 +1,14 @@
 <?php
-include_once('../app/config/config.php');
+
 class Database
 {
-    private $type = DB_TYPE;
-    private $host = DB_HOST;
-    private $dbname = DB_NAME;
-    private $user = DB_USER;
-    private $pass = DB_PASS;
+    private string $type = DB_TYPE;
+    private string $host = DB_HOST;
+    private string $dbname = DB_NAME;
+    private string $user = DB_USER;
+    private string $pass = DB_PASS;
 
-    private $dbh;
+    private PDO $dbh;
     private $stmt;
 
     public function __construct() {
@@ -23,66 +23,41 @@ class Database
         }
     }
 
-    /**
-     * @param $query
-     * @return void
-     */
-    public function query($query) {
+    public function query($query): void
+    {
         $this->stmt = $this->dbh->prepare($query);
     }
 
-    /**
-     * @param $param
-     * @param $value
-     * @param $type
-     * @return void
-     */
-    public function bind($param, $value, $type = null) {
+    public function bind($param, $value, $type = null): void
+    {
         if (is_null($type)) {
-            switch (true) {
-                case is_int($value):
-                    $type = PDO::PARAM_INT;
-                    break;
-                case is_null($value):
-                    $type = PDO::PARAM_NULL;
-                    break;
-                case is_bool($value):
-                    $type = PDO::PARAM_BOOL;
-                    break;
-                default:
-                    $type = PDO::PARAM_STR;
-            }
+            $type = match (true) {
+                is_int($value) => PDO::PARAM_INT,
+                is_null($value) => PDO::PARAM_NULL,
+                is_bool($value) => PDO::PARAM_BOOL,
+                default => PDO::PARAM_STR,
+            };
         }
         $this->stmt->bindValue($param,$value,$type);
     }
 
-    /**
-     * @return mixed
-     */
     public function execute() {
         return $this->stmt->execute();
     }
 
-    /**
-     * @return array
-     */
     public function getAll() {
         $this->execute();
         return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * @return array
-     */
-    public function getSingle() {
+    public function getSingle(): array|bool
+    {
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * @return int
-     */
-    public function getRowCount() {
+    public function getRowCount(): int
+    {
         $this->execute();
         return $this->stmt->rowCount();
     }
