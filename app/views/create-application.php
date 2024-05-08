@@ -1,6 +1,6 @@
-<?php require APPROOT . 'views/include/header.php';?>
+<?php require APPROOT . 'views/include/header.php'; ?>
 <body class="text-white" style="background-color: #1F2634">
-<?php require APPROOT . 'views/components/userNavBar.php';?>
+<?php require APPROOT . 'views/components/userNavBar.php'; ?>
 <div class="container my-5">
     <div class="row mt-2">
         <div class="col-sm-5 mb-4 mb-sm-4">
@@ -153,4 +153,5 @@
             </div>
         </div>
     </div>
+</div>
 </body>

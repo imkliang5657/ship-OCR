@@ -9,16 +9,16 @@ class Database
     private string $pass = DB_PASS;
 
     private PDO $dbh;
-    private $stmt;
+    private PDOStatement $stmt;
 
-    public function __construct() {
+    public function __construct()
+    {
         try {
             $this->dbh = new PDO(
-                $this->type . ":host=".$this->host . ";dbname=".$this->dbname,
-                $this->user,$this->pass
+                $this->type . ":host=" . $this->host . ";dbname=" . $this->dbname,
+                $this->user, $this->pass
             );
-        }
-        catch(PDOException $e){
+        } catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
@@ -38,14 +38,16 @@ class Database
                 default => PDO::PARAM_STR,
             };
         }
-        $this->stmt->bindValue($param,$value,$type);
+        $this->stmt->bindValue($param, $value, $type);
     }
 
-    public function execute() {
+    public function execute(): bool
+    {
         return $this->stmt->execute();
     }
 
-    public function getAll() {
+    public function getAll(): bool|array
+    {
         $this->execute();
         return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -61,5 +63,4 @@ class Database
         $this->execute();
         return $this->stmt->rowCount();
     }
-
 }

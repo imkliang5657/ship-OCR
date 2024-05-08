@@ -46,5 +46,4 @@ class Controller
         unset($_GET['url']);
         return $_GET;
     }
-
 }

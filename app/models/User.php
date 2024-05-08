@@ -1,9 +1,11 @@
 <?php
 
-class User {
+class User
+{
     private Database $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = new Database();
     }
 
@@ -14,5 +16,4 @@ class User {
         $this->db->bind('account', $account);
         return $this->db->getSingle();
     }
-
 }
