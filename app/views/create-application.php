@@ -21,9 +21,9 @@
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">使用船期</span>
-                        <input type="text" class="form-control" value="">
+                        <input type="text" class="form-control datepicker" value="">
                         <span class="input-group-text">至</span>
-                        <input type="text" class="form-control" value="">
+                        <input type="text" class="form-control datepicker" value="">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">說明</span>
@@ -154,4 +154,5 @@
         </div>
     </div>
 </div>
+<script src="./js/datepicker.js"></script>
 </body>
