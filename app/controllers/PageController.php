@@ -17,7 +17,7 @@ Class PageController extends Controller
         $this->view('domestic-ship');
     }
 
-    public function domesticShipInformation(): void
+   public function domesticShipInformation(): void
     {
         $getData = $this->retrieveGetData();
         $name = match ($getData['ship_id']) {
@@ -49,7 +49,10 @@ Class PageController extends Controller
     {
         $this->view('announcement');
     }
-
+    public function windFarm(): void
+    {
+        $this->view('wind-farm');
+    }
     public function login(): void
     {
         $getData = $this->retrieveGetData();
