@@ -21,5 +21,5 @@
         </div>
     </div>
 </div>
-</body>
 <?php require APPROOT . 'views/include/footer.php'; ?>
+</body>

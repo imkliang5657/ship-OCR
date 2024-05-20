@@ -155,4 +155,5 @@
     </div>
 </div>
 <script src="./js/datepicker.js"></script>
+<?php require APPROOT . 'views/include/footer.php'; ?>
 </body>

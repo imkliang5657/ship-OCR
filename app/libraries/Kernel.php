@@ -25,10 +25,10 @@ class Kernel
         } catch (HttpStatusException $e) {
             http_response_code($e->getStatusCode());
             $controller = new Controller();
-            $controller->view("exception",
+            $controller->view('exception',
                 [
-                    'status' => $e->getStatusCode() . " " . HttpStatusException::getResponseStatusCodeText($e->getStatusCode()),
-                    'message' => $e->getMessage()
+                    'status' => $e->getStatusCode() . ' ' . HttpStatusException::getResponseStatusCodeText($e->getStatusCode()),
+                    'message' => $e->getMessage(),
                 ]
             );
         }
