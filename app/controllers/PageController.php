@@ -17,7 +17,7 @@ Class PageController extends Controller
         $this->view('domestic-ship');
     }
 
-   public function domesticShipInformation(): void
+  /* public function domesticShipInformation(): void
     {
         $getData = $this->retrieveGetData();
         $name = match ($getData['ship_id']) {
@@ -33,11 +33,16 @@ Class PageController extends Controller
             default => ''
         };
         $this->view('domestic-ship-information', ['name' => $name]);
-    }
+    }*/
 
     public function shipApplicationDashboard(): void
     {
         $this->view('ship-application-dashboard');
+    }
+
+    public function createWindFarm(): void
+    {
+        $this->view('create-wind-farm');
     }
 
     public function createApplication(): void
