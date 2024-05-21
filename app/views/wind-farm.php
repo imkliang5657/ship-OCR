@@ -18,21 +18,56 @@
                 <div class="card-body">
                     <h5 class="card-title text-light">台灣風場</h5>
                     <p class="card-text text-secondary">選擇下列風場</p>
-
-                    <div class="btn-group-vertical">
-                        <button type="button" class="btn btn-outline-light">海洋</button>
-                        <button type="button" class="btn btn-outline-light">海能</button>
-                        <button type="button" class="btn btn-outline-light">台電一期</button>
-                        <button type="button" class="btn btn-outline-light">允能</button>
-                        <button type="button" class="btn btn-outline-light">彰芳</button>
-                        <button type="button" class="btn btn-outline-light">西島</button>
-                        <button type="button" class="btn btn-outline-light">大彰化東南</button>
-                        <button type="button" class="btn btn-outline-light">大彰化西南</button>
-                        <button type="button" class="btn btn-outline-light">大彰化西北</button>
-                        <button type="button" class="btn btn-outline-light">中能</button>
-                        <button type="button" class="btn btn-outline-light">海龍二號</button>
-                        <button type="button" class="btn btn-outline-light">台電二期</button>
-                        <button type="button" class="btn btn-outline-light">海龍三號</button>
+                    
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="./?url=page/create-wind-farm&id=1" class="btn btn-primary" role="button">台電一期</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="./?url=page/create-wind-farm&id=2" class="btn btn-primary" role="button">台電二期</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="./?url=page/create-wind-farm&id=3" class="btn btn-primary" role="button">中能</a>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <a href="./?url=page/create-wind-farm&id=4" class="btn btn-primary" role="button">允能</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="./?url=page/create-wind-farm&id=5" class="btn btn-primary" role="button">大彰化东南</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="./?url=page/create-wind-farm&id=6" class="btn btn-primary" role="button">大彰化西北</a>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <a href="./?url=page/create-wind-farm&id=7" class="btn btn-primary" role="button">大彰化西南</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="./?url=page/create-wind-farm&id=8" class="btn btn-primary" role="button">彰芳</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="./?url=page/create-wind-farm&id=9" class="btn btn-primary" role="button">海洋</a>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <a href="./?url=page/create-wind-farm&id=10" class="btn btn-primary" role="button">海能</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="./?url=page/create-wind-farm&id=11" class="btn btn-primary" role="button">海龙二号</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="./?url=page/create-wind-farm&id=12" class="btn btn-primary" role="button">海龙三号</a>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <a href="./?url=page/create-wind-farm&id=13" class="btn btn-primary" role="button">西岛</a>
+                            </div>
+                        </div>  
                     </div>
                 </div>
             </div>

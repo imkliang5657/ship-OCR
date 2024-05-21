@@ -6,6 +6,7 @@ class Api
         'noRestriction' => [
             'page/login' => ['PageController', 'login'],
             'login' => ['AuthController', 'login'],
+           
         ],
         'hasLogin' => [
             'page/dashboard' => ['PageController', 'dashboard'],

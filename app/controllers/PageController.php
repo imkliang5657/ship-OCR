@@ -2,6 +2,7 @@
 
 class PageController extends Controller
 {
+    private $WindModel;
     public function dashboard(): void
     {
         $this->view('dashboard');
@@ -42,7 +43,12 @@ class PageController extends Controller
 
     public function createWindFarm(): void
     {
-        $this->view('create-wind-farm');
+        $getData = $this->retrieveGetData();
+        $id=$getData;
+        $this->WindModel=$this->model('WindModel');
+        $data=$this->WindModel->getWindFarmByid($id['id']);
+        $id['name']=$data['name'];
+        $this->view('create-wind-farm',$id);
     }
 
     public function createApplication(): void
