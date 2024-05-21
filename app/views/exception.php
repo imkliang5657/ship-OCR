@@ -1,5 +1,5 @@
-<?php require APPROOT . 'views/include/header.php'; ?>
-<?php require APPROOT . 'views/components/publicNavBar.php'; ?>
+<?php require APP_ROOT . 'views/include/header.php'; ?>
+<?php require APP_ROOT . 'views/components/publicNavBar.php'; ?>
 <body class="text-white" style="background-color: #1F2634">
 <div class="container my-5">
     <div class="row mt-2">
@@ -9,5 +9,5 @@
         </div>
     </div>
 </div>
-<?php require APPROOT . 'views/include/footer.php'; ?>
+<?php require APP_ROOT . 'views/include/footer.php'; ?>
 </body>

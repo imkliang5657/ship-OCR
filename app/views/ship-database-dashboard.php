@@ -1,6 +1,6 @@
-<?php require APPROOT . 'views/include/header.php'; ?>
+<?php require APP_ROOT . 'views/include/header.php'; ?>
 <body class="text-white" style="background-color: #1F2634">
-<?php require APPROOT . 'views/components/userNavBar.php'; ?>
+<?php require APP_ROOT . 'views/components/userNavBar.php'; ?>
 <div class="container my-5">
     <div class="row">
         <div class="col-sm-4 mb-3 mb-sm-4">
@@ -43,5 +43,5 @@
         </div>
     </div>
 </div>
-<?php require APPROOT . 'views/include/footer.php'; ?>
+<?php require APP_ROOT . 'views/include/footer.php'; ?>
 </body>

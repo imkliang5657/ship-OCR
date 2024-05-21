@@ -4,6 +4,7 @@ class Database
 {
     private string $type = DB_TYPE;
     private string $host = DB_HOST;
+    private string $port = DB_PORT;
     private string $dbname = DB_NAME;
     private string $user = DB_USER;
     private string $pass = DB_PASS;
@@ -14,10 +15,7 @@ class Database
     public function __construct()
     {
         try {
-            $this->dbh = new PDO(
-                $this->type . ":host=" . $this->host . ";dbname=" . $this->dbname,
-                $this->user, $this->pass
-            );
+            $this->dbh = new PDO("$this->type:host=$this->host;port=$this->port;dbname=$this->dbname", $this->user, $this->pass);
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -52,7 +50,7 @@ class Database
         return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getSingle(): array|bool
+    public function getSingle(): mixed
     {
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_ASSOC);
