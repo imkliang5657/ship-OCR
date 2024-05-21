@@ -2,7 +2,6 @@
 
 class PageController extends Controller
 {
-    private $WindModel;
     public function dashboard(): void
     {
         $this->view('dashboard');
@@ -41,16 +40,6 @@ class PageController extends Controller
         $this->view('ship-application-dashboard');
     }
 
-    public function createWindFarm(): void
-    {
-        $getData = $this->retrieveGetData();
-        $id=$getData;
-        $this->WindModel=$this->model('WindModel');
-        $data=$this->WindModel->getWindFarmByid($id['id']);
-        $id['name']=$data['name'];
-        $this->view('create-wind-farm',$id);
-    }
-
     public function createApplication(): void
     {
         $this->view('create-application');
@@ -63,7 +52,19 @@ class PageController extends Controller
 
     public function windFarm(): void
     {
-        $this->view('wind-farm');
+        $this->view('wind-farm', ['categories' => $this->model('WindFarmCategory')->getAll()]);
+    }
+
+    public function createWindFarm(): void
+    {
+        $getData = $this->retrieveGetData();
+        if (isset($getData['id'])) {
+            $getData['name'] = $this->model('WindFarm')->getWindFarmByid($getData['id'])['name'];
+            $this->view('create-wind-farm', $getData);
+        } else {
+            $this->redirect('./?url=page/wind-farm');
+        }
+
     }
 
     public function login(): void

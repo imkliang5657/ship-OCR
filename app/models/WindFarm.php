@@ -1,6 +1,6 @@
 <?php
 
-class WindModel
+class WindFarm
 {
     private Database $db;
 
@@ -9,11 +9,11 @@ class WindModel
         $this->db = new Database();
     }
 
-    public function getWindFarmByid($id)
+    public function getWindFarmById($id): mixed
     {
-        $query = "SELECT * FROM `wind_farm_table` WHERE `id` =$id";
+        $query = 'SELECT * FROM `wind_farms` WHERE `id` = :id';
         $this->db->query($query);
-        // $this->db->bind('account', $id);
+        $this->db->bind('id', $id);
         return $this->db->getSingle();
     }
 }

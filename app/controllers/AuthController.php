@@ -6,14 +6,16 @@ class AuthController extends Controller
 {
     private mixed $userModel;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->userModel = $this->model('User');
     }
 
     /**
      * @throws HttpStatusException
      */
-    public function login() {
+    public function login(): void
+    {
         $postData = $this->retrievePostData();
         $user = $this->userModel->getUserByAccount($postData['account']);
         if (isset($user['password']) && $user['password'] == $postData['password']) {
@@ -25,7 +27,8 @@ class AuthController extends Controller
         }
     }
 
-    #[NoReturn] public function logout() {
+    #[NoReturn] public function logout(): void
+    {
         session_destroy();
         $this->redirect('./?url=page/login');
         exit();

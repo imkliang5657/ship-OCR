@@ -9,9 +9,9 @@ class User
         $this->db = new Database();
     }
 
-    public function getUserByAccount($account): bool|array
+    public function getUserByAccount($account): mixed
     {
-        $query = 'SELECT * FROM `Users` WHERE `account` = :account';
+        $query = 'SELECT * FROM `users` WHERE `account` = :account';
         $this->db->query($query);
         $this->db->bind('account', $account);
         return $this->db->getSingle();

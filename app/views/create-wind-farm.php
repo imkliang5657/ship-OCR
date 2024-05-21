@@ -7,8 +7,8 @@
     <div class="row min-vh-100 mt-2" id="form-container"></div>
 </div>
 <script>
-    $(document).ready(function() {
-        $('#add-form').click(function() {
+    $(document).ready(function () {
+        $('#add-form').click(function () {
             $('#form-container').append(`<?php require APP_ROOT . 'views/components/wind-farm-new-form.php'; ?>`);
         });
     });
