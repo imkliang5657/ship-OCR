@@ -11,6 +11,26 @@ class WindFarmController extends Controller
         $this->windFarmInformation = $this->model('WindFarmInformation');
     }
 
+    public function windFarm(): void
+    {
+        $this->view('wind-farm', ['windFarms' => $this->model('WindFarm')->getAll()]);
+    }
+
+    public function windFarmInformation(): void
+    {
+        $getData = $this->retrieveGetData();
+        if (isset($getData['id'])) {
+            $windFarm = $this->model('WindFarm')->getByid($getData['id']);
+            $this->view('wind-farm-information', [
+                'windFarm' => $windFarm,
+                'windFarmInformation' => $this->model('WindFarmInformation')->getByWindFarmId($windFarm['id']),
+                'vesselCategories' => $this->model('VesselCategory')->getAll(),
+            ]);
+        } else {
+            $this->redirect('./?url=page/wind-farm');
+        }
+    }
+
     public function upsertInformation(): void
     {
         $postData = $this->retrievePostData();
