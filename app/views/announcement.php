@@ -93,6 +93,7 @@
                                 <a href="#" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
                                     預告修正『戰略性高科技貨品種類、特定戰略性高科技貨品種類及輸出管制地區』之戰略性高貨品種類
                                 </a>
+                            </td>
                             <td>國際貿易署</td>
                         </tr>
                         <tr>
@@ -101,6 +102,7 @@
                                 <a href="#" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
                                     預告修正『戰略性高科技貨品種類、特定戰略性高科技貨品種類及輸出管制地區』之戰略性高貨品種類
                                 </a>
+                            </td>
                             <td>國際貿易署</td>
                         </tr>
                         <tr>
@@ -110,6 +112,7 @@
                                     陸製船舶引入審查機制，船舶諮詢及審查會議行政流程
                                     <i class="bi bi-arrow-up-right-square"></i>
                                 </a>
+                            </td>
                             <td></td>
                         </tr>
                         <tr>
@@ -119,6 +122,7 @@
                                     外製船舶引入審查機制，船舶諮詢及審查會議行政流程
                                     <i class="bi bi-arrow-up-right-square"></i>
                                 </a>
+                            </td>
                             <td></td>
                         </tr>
                         </tbody>

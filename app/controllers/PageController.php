@@ -62,7 +62,8 @@ class PageController extends Controller
             $windFarm = $this->model('WindFarm')->getByid($getData['id']);
             $this->view('wind-farm-information', [
                 'windFarm' => $windFarm,
-                'windFarmInformation' => $this->model('WindFarmInformation')->getAll(),
+                'windFarmInformation' => $this->model('WindFarmInformation')->getByWindFarmId($windFarm['id']),
+                'vesselCategories' => $this->model('VesselCategory')->getAll(),
             ]);
         } else {
             $this->redirect('./?url=page/wind-farm');

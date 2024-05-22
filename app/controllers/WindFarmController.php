@@ -11,18 +11,18 @@ class WindFarmController extends Controller
         $this->windFarmInformation = $this->model('WindFarmInformation');
     }
 
-    public function createInformation(): void
+    public function upsertInformation(): void
     {
         $postData = $this->retrievePostData();
-        $this->windFarmInformation->create($postData);
-    }
-
-    public function updateInformation(): void
-    {
-        $postData = $this->retrievePostData();
-        $information = $this->windFarm->getById($postData['id']);
-        if (isset($information)) {
-            $this->windFarmInformation->update($postData);
+        if (empty($postData['id'])) {
+            $this->windFarmInformation->create($postData);
+        } else {
+            var_dump('update');
+            $information = $this->windFarm->getById($postData['id']);
+            if (isset($information)) {
+                $this->windFarmInformation->update($postData);
+            }
         }
+        $this->redirect('./?url=page/wind-farm-information&id=' . $postData['wind_farm_id']);
     }
 }

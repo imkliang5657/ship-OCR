@@ -1,6 +1,8 @@
 $(document).ready(function(){
-    $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd',
-        autoclose: true
+    $(document).on('focus', '.datepicker', function() {
+        $(this).datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true
+        });
     });
 });
