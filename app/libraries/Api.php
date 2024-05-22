@@ -6,7 +6,6 @@ class Api
         'noRestriction' => [
             'page/login' => ['PageController', 'login'],
             'login' => ['AuthController', 'login'],
-           
         ],
         'hasLogin' => [
             'page/dashboard' => ['PageController', 'dashboard'],
@@ -16,7 +15,9 @@ class Api
             'page/ship-application-dashboard' => ['PageController', 'shipApplicationDashboard'],
             'page/create-application' => ['PageController', 'createApplication'],
             'page/wind-farm' => ['PageController', 'windFarm'],
-            'page/create-wind-farm' =>['PageController','createWindFarm'],
+            'page/wind-farm-information' =>['PageController','windFarmInformation'],
+            'create-wind-farm-information' =>['WindFarmController','createInformation'],
+            'update-wind-farm-information' =>['WindFarmController','updateInformation'],
             'page/get/bulletins' => ['BulletinController', 'search'],
             'page/announcement' => ['PageController', 'announcement'],
             'logout' => ['AuthController', 'logout'],

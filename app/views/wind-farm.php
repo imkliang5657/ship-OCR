@@ -18,13 +18,13 @@
                     <h5 class="card-title text-light">台灣風場</h5>
                     <p class="card-text text-secondary">選擇下列風場</p>
                     <div class="row mb-3">
-                        <?php foreach ($data['categories'] as $i => $category): ?>
+                        <?php foreach ($data['windFarms'] as $i => $windFarm): ?>
                         <?php if ($i % 3 == 0): ?>
                     </div>
                     <div class="row mb-3">
                         <?php endif; ?>
                         <div class="col-md-4">
-                            <a href="./?url=page/create-wind-farm&id=<?php echo $category['id'] ?>" class="btn btn-primary" role="button"><?php echo $category['name'] ?></a>
+                            <a href="./?url=page/wind-farm-information&id=<?= $windFarm['id'] ?>" class="btn btn-primary" role="button"><?= $windFarm['name'] ?></a>
                         </div>
                         <?php endforeach; ?>
                     </div>

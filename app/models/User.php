@@ -11,9 +11,9 @@ class User
 
     public function getUserByAccount($account): mixed
     {
-        $query = 'SELECT * FROM `users` WHERE `account` = :account';
+        $query = 'SELECT * FROM `users` WHERE `account`=:account';
         $this->db->query($query);
-        $this->db->bind('account', $account);
+        $this->db->bind(':account', $account);
         return $this->db->getSingle();
     }
 }

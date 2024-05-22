@@ -4,16 +4,13 @@ use JetBrains\PhpStorm\NoReturn;
 
 class AuthController extends Controller
 {
-    private mixed $userModel;
+    protected User $userModel;
 
     public function __construct()
     {
         $this->userModel = $this->model('User');
     }
 
-    /**
-     * @throws HttpStatusException
-     */
     public function login(): void
     {
         $postData = $this->retrievePostData();

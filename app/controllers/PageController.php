@@ -52,19 +52,21 @@ class PageController extends Controller
 
     public function windFarm(): void
     {
-        $this->view('wind-farm', ['categories' => $this->model('WindFarmCategory')->getAll()]);
+        $this->view('wind-farm', ['windFarms' => $this->model('WindFarm')->getAll()]);
     }
 
-    public function createWindFarm(): void
+    public function windFarmInformation(): void
     {
         $getData = $this->retrieveGetData();
         if (isset($getData['id'])) {
-            $getData['name'] = $this->model('WindFarm')->getWindFarmByid($getData['id'])['name'];
-            $this->view('create-wind-farm', $getData);
+            $windFarm = $this->model('WindFarm')->getByid($getData['id']);
+            $this->view('wind-farm-information', [
+                'windFarm' => $windFarm,
+                'windFarmInformation' => $this->model('WindFarmInformation')->getAll(),
+            ]);
         } else {
             $this->redirect('./?url=page/wind-farm');
         }
-
     }
 
     public function login(): void

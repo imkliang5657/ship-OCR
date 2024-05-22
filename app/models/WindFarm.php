@@ -9,9 +9,16 @@ class WindFarm
         $this->db = new Database();
     }
 
-    public function getWindFarmById($id): mixed
+    public function getAll(): array|bool
     {
-        $query = 'SELECT * FROM `wind_farms` WHERE `id` = :id';
+        $query = 'SELECT * FROM `wind_farms`';
+        $this->db->query($query);
+        return $this->db->getAll();
+    }
+
+    public function getById($id): mixed
+    {
+        $query = 'SELECT * FROM `wind_farms` WHERE `id`=:id';
         $this->db->query($query);
         $this->db->bind('id', $id);
         return $this->db->getSingle();

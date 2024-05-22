@@ -1,4 +1,5 @@
 <?php
+$id = $id ?? '';
 echo <<<HTML
 <div class="col-sm-5 mb-4 mb-sm-4">
     <div class="card p-2" style="background-color: #2A3041">
@@ -8,6 +9,7 @@ echo <<<HTML
                     <h4 class="card-title text-light mb-3">基本資料</h4>
                 </div>
             </div>
+            <input type="hidden" name="id" value="$id">
             <div class="input-group my-3">
                 <span class="input-group-text" id="basic-addon1">風場</span>
                 <input type="text" class="form-control" value="">

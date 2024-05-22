@@ -21,12 +21,12 @@ class Database
         }
     }
 
-    public function query($query): void
+    public function query(string $query): void
     {
         $this->stmt = $this->dbh->prepare($query);
     }
 
-   public function bind($param, $value, $type = null): void
+   public function bind(string $param, mixed $value, int $type = null): void
     {
         if (is_null($type)) {
             $type = match (true) {
