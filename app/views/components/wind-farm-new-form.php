@@ -1,4 +1,3 @@
-<?php $id = $id ?? ''; ?>
 <div class="col-sm-5 mb-4 mb-sm-4">
     <div class="card p-2" style="background-color: #2A3041">
         <div class="card-body">
