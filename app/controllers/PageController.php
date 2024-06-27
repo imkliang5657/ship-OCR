@@ -7,20 +7,20 @@ class PageController extends Controller
         $this->view('dashboard');
     }
 
-    public function shipDatabaseDashboard(): void
+    public function vesselDatabaseDashboard(): void
     {
-        $this->view('ship-database-dashboard');
+        $this->view('vessel-database-dashboard');
     }
 
-    public function domesticShip(): void
+    public function domesticVessel(): void
     {
-        $this->view('domestic-ship');
+        $this->view('domestic-vessel');
     }
 
-    public function domesticShipInformation(): void
+    public function domesticVesselInformation(): void
     {
         $getData = $this->retrieveGetData();
-        $name = match ($getData['ship_id']) {
+        $name = match ($getData['vessel_id']) {
             1 => '翡翠輪',
             2 => '東方海威',
             3 => '台船11號',
@@ -32,12 +32,12 @@ class PageController extends Controller
             9 => '大三商領航者',
             default => ''
         };
-        $this->view('domestic-ship-information', ['name' => $name]);
+        $this->view('domestic-vessel-information', ['name' => $name]);
     }
 
-    public function shipApplicationDashboard(): void
+    public function vesselApplicationDashboard(): void
     {
-        $this->view('ship-application-dashboard');
+        $this->view('vessel-application-dashboard');
     }
 
    

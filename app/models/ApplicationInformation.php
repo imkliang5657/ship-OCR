@@ -1,6 +1,6 @@
 <?php
 
-class Application
+class ApplicationInformation
 {
     private Database $db;
 
@@ -9,16 +9,9 @@ class Application
         $this->db = new Database();
     }
 
-    public function getAll(): array|bool
+    public function getByApplicationId(int $id): mixed
     {
-        $query = 'SELECT * FROM `applications`';
-        $this->db->query($query);
-        return $this->db->getAll();
-    }
-
-    public function getById($id): mixed
-    {
-        $query = 'SELECT * FROM `applications` WHERE `id`=:id';
+        $query = 'SELECT * FROM `application_informations` WHERE `application_id`=:id';
         $this->db->query($query);
         $this->db->bind(':id', $id);
         return $this->db->getSingle();
@@ -26,7 +19,6 @@ class Application
 
     public function create(array $data): int
     {
-        $_SESSION['id'] = 1;
         $query = <<<SQL
             INSERT INTO `applications`(`applicant_id`) VALUES ({$_SESSION['id']})
         SQL;
@@ -39,6 +31,7 @@ class Application
         $this->db->query($query);
         $this->db->execute();
         $application = $this->db->getSingle();
+        $data['application_id'] = $application['id'];
 
         $query = <<<SQL
             INSERT INTO
@@ -47,7 +40,7 @@ class Application
                 (:application_id, :wind_farm_id, :work_item, :vessel_category_id, :required_sailing_date, :required_return_date, :description)
         SQL;
         $this->db->query($query);
-        $this->db->bind(':application_id', $application['id']);
+        $this->db->bind(':application_id', $data['application_id']);
         $this->db->bind(':wind_farm_id', $data['wind_farm_id']);
         $this->db->bind(':work_item', $data['work_item']);
         $this->db->bind(':vessel_category_id', $data['vessel_category_id']);

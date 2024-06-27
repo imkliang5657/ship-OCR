@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <h5 class="card-title text-light">國內船舶資訊</h5>
                     <p class="card-text text-secondary">顯示國內業者旗下各種類型船舶和可用船期。</p>
-                    <a href="./?url=page/domestic-ship" class="btn btn-sm btn-primary">點擊前往功能</a>
+                    <a href="./?url=page/domestic-vessel" class="btn btn-sm btn-primary">點擊前往功能</a>
                 </div>
             </div>
         </div>

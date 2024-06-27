@@ -14,10 +14,10 @@ echo <<<HTML
                     <a class="nav-link" aria-current="page" href="./?url=page/dashboard">首頁</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./?url=page/ship-database-dashboard">船舶資料庫</a>
+                    <a class="nav-link" href="./?url=page/vessel-database-dashboard">船舶資料庫</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./?url=page/ship-application-dashboard">船舶申請</a>
+                    <a class="nav-link" href="./?url=page/vessel-application-dashboard">船舶申請</a>
                 </li>
             </ul>
         </div>
