@@ -26,7 +26,7 @@ class ApplicationInformation
         $this->db->execute();
 
         $query = <<<SQL
-            SELECT LAST_INSERT_ID() as id
+            SELECT LAST_INSERT_ID() as `id`
         SQL;
         $this->db->query($query);
         $this->db->execute();

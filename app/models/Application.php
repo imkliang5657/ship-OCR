@@ -34,7 +34,7 @@ class Application
         $this->db->execute();
 
         $query = <<<SQL
-            SELECT LAST_INSERT_ID() as id
+            SELECT LAST_INSERT_ID() as `id`
         SQL;
         $this->db->query($query);
         $this->db->execute();
@@ -57,6 +57,32 @@ class Application
         $this->db->execute();
 
         return $application['id'];
+    }
+
+    public function update(array $data): void
+    {
+        $query = <<<SQL
+            UPDATE
+                `application_informations`
+            SET
+                `wind_farm_id`=:wind_farm_id,
+                `work_item`=:work_item,
+                `vessel_category_id`=:vessel_category_id,
+                `required_sailing_date`=:required_sailing_date,
+                `required_return_date`=:required_return_date,
+                `description`=:description
+            WHERE
+                `application_id`=:application_id
+        SQL;
+        $this->db->query($query);
+        $this->db->bind(':application_id', $data['application_id']);
+        $this->db->bind(':wind_farm_id', $data['wind_farm_id']);
+        $this->db->bind(':work_item', $data['work_item']);
+        $this->db->bind(':vessel_category_id', $data['vessel_category_id']);
+        $this->db->bind(':required_sailing_date', $data['required_sailing_date']);
+        $this->db->bind(':required_return_date', $data['required_return_date']);
+        $this->db->bind(':description', $data['description']);
+        $this->db->execute();
     }
 }
 

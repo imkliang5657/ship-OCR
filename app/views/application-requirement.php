@@ -12,13 +12,14 @@
         </div>
     </div>
     <div class="card-body">
-        <form method="post" action="./?url=create-requirement">
-            <input type="hidden" name="application_id" value="<?= $data['application_id'] ?>">
+        <form method="post" action="./?url=upsert-requirement">
+            <input type="hidden" name="application_id" value="<?= $data['applicationId'] ?>">
+            <input type="hidden" name="id" value="<?= $data['vesselDetail']['id'] ?>">
             <?php foreach ($data['columns'] as $index => $column): ?>
                 <div class="input-group my-3">
                     <span class="input-group-text" style="width: 15%;"><?= $column ?></span>
                     <span class="input-group-text">為</span>
-                    <input type="text" class="form-control" name="specification_<?= $index + 1 ?>" placeholder="">
+                    <input type="text" class="form-control" name="specification_<?= $index + 1 ?>" value="<?= $data['vesselDetail']['specification_' . $index + 1] ?>">
                 </div>
             <?php endforeach; ?>
             <button type="submit" class="btn btn-success ms-1"><i class="bi bi-cursor-fill"></i> 提交</button>

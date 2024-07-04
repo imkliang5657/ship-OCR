@@ -4,7 +4,7 @@
 <div class="container my-5">
     <div class="card">
         <div class="card-header">
-            <a href="./?url=page/create-application" class="btn btn-primary" role="button">新增申請案</a>
+            <a href="./?url=page/application-case" class="btn btn-primary" role="button">新增申請案</a>
         </div>
         <div class="card-body">
             <table class="table table-striped">

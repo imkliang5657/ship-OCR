@@ -16,12 +16,12 @@ class Api
 
             'page/application-manage' => ['ApplicationController', 'applicationManage'],
             'page/application-stage' => ['ApplicationController', 'applicationStage'],
-            'page/create-application' => ['ApplicationController', 'createApplication'],
-            'create-application-case' => ['ApplicationController', 'create'],
-            'page/application-requirement-spec' => ['ApplicationController', 'requirementSpec'],
-            'create-requirement' => ['ApplicationController', 'createRequirement'],
-            'page/application-vessel' => ['ApplicationController', 'applicationVessel'],
-            'create-application-vessel' => ['ApplicationController', 'createApplicationVessel'],
+            'page/application-case' => ['ApplicationController', 'showApplication'],
+            'upsert-application-case' => ['ApplicationController', 'upsertApplicationCase'],
+            'page/application-requirement' => ['ApplicationController', 'showApplicationRequirement'],
+            'upsert-requirement' => ['ApplicationController', 'upsertRequirement'],
+            'page/application-foreign-vessel' => ['ApplicationController', 'showApplicationForeignVessel'],
+            'upsert-application-foreign-vessel' => ['ApplicationController', 'upsertApplicationVessel'],
 
             'page/wind-farm-new-form' => ['WindFarmController', 'windFarmNewForm'],
             'page/wind-farm' => ['WindFarmController', 'windFarm'],

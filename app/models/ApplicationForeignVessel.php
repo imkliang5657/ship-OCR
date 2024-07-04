@@ -16,9 +16,9 @@ class ApplicationForeignVessel
         return $this->db->getAll();
     }
 
-    public function getById(int $id): mixed
+    public function getByApplicationId(int $id): mixed
     {
-        $query = 'SELECT * FROM `application_foreign_vessel` WHERE `id`=:id';
+        $query = 'SELECT * FROM `application_foreign_vessel` WHERE `application_id`=:id';
         $this->db->query($query);
         $this->db->bind(':id', $id);
         return $this->db->getSingle();
@@ -31,6 +31,24 @@ class ApplicationForeignVessel
             VALUES (:foreign_vessel_id, :application_id)
         SQL;
         $this->db->query($query);
+        $this->db->bind(':foreign_vessel_id', $data['foreign_vessel_id']);
+        $this->db->bind(':application_id', $data['application_id']);
+        $this->db->execute();
+    }
+
+    public function update(array $data): void
+    {
+        $query = <<<SQL
+            UPDATE
+                `application_foreign_vessel`
+            SET
+                `foreign_vessel_id`=:foreign_vessel_id,
+                `application_id`=:application_id
+            WHERE
+                `id`=:id
+        SQL;
+        $this->db->query($query);
+        $this->db->bind(':id', $data['id']);
         $this->db->bind(':foreign_vessel_id', $data['foreign_vessel_id']);
         $this->db->bind(':application_id', $data['application_id']);
         $this->db->execute();

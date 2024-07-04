@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <h5 class="card-title text-light">新增申請案</h5>
                     <p class="card-text text-secondary">上傳規格書或者手動輸入船舶資訊，並選擇先前上傳的申請案，以確認校對結果是否正確</p>
-                    <a href="./?url=page/create-application" class="btn btn-sm btn-primary">點擊前往功能</a>
+                    <a href="./?url=page/application-case" class="btn btn-sm btn-primary">點擊前往功能</a>
                 </div>
             </div>
         </div>

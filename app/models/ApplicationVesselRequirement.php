@@ -16,9 +16,9 @@ class ApplicationVesselRequirement
         return $this->db->getAll();
     }
 
-    public function getById(int $id): mixed
+    public function getByApplicationId(int $id): mixed
     {
-        $query = 'SELECT * FROM `application_vessel_requirements` WHERE `id`=:id';
+        $query = 'SELECT * FROM `application_vessel_requirements` WHERE `application_id`=:id';
         $this->db->query($query);
         $this->db->bind(':id', $id);
         return $this->db->getSingle();

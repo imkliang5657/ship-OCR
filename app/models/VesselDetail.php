@@ -26,12 +26,12 @@ class VesselDetail
         return $this->db->getSingle();
     }
 
-    public function create(array $data): void
+    public function create(array $data): int
     {
         $columns = array_map(fn($i) => "specification_$i", range(1, self::MAX_SPEC_COUNT));
         $placeholders = array_map(fn($column) => ':' . $column, $columns);
         $values = array_values(array_intersect_key($data, array_flip($columns)));
-        $columnsStr = implode(', ', $columns);
+        $columnsStr = implode(', ', array_map(fn($column) => "`$column`", $columns));
         $placeholdersStr = implode(', ', $placeholders);
         $query = <<<SQL
             INSERT INTO `vessel_details`($columnsStr)
@@ -42,13 +42,29 @@ class VesselDetail
             $this->db->bind($placeholders[$i], $values[$i]);
         }
         $this->db->execute();
-    }
 
-    public function lastInsertId(): int
-    {
-        $query = 'SELECT LAST_INSERT_ID() as id';
+        $query = <<<SQL
+            SELECT LAST_INSERT_ID() as `id`
+        SQL;
         $this->db->query($query);
         $this->db->execute();
         return $this->db->getSingle()['id'];
+    }
+
+    public function update(array $data): void
+    {
+        $columns = array_map(fn($i) => "specification_$i", range(1, self::MAX_SPEC_COUNT));
+        $placeholders = array_map(fn($column) => ':' . $column, $columns);
+        $values = array_values(array_intersect_key($data, array_flip($columns)));
+        $combinedStr =  implode(', ', array_map(fn($column, $placeholder) => "`$column`=$placeholder", $columns, $placeholders));
+        $query = <<<SQL
+            UPDATE `vessel_details` SET $combinedStr WHERE `id`=:id
+        SQL;
+        $this->db->query($query);
+        $this->db->bind(':id', $data['id']);
+        for ($i = 0; $i < self::MAX_SPEC_COUNT; $i++) {
+            $this->db->bind($placeholders[$i], $values[$i]);
+        }
+        $this->db->execute();
     }
 }

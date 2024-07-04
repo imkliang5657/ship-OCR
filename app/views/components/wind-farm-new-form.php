@@ -2,13 +2,13 @@
     <div class="card p-2" style="background-color: #2A3041">
         <div class="card-body">
             <form method="post" action="./?url=upsert-wind-farm-information">
+                <input type="hidden" name="id" value="<?= $id ?>">
+                <input type="hidden" name="wind_farm_id" value="<?= $data['windFarm']['id'] ?>">
                 <div class="row">
                     <div class="col-5">
                         <h4 class="card-title text-light mb-3">基本資料</h4>
                     </div>
                 </div>
-                <input type="hidden" name="id" value="<?= $id ?>">
-                <input type="hidden" name="wind_farm_id" value="<?= $data['windFarm']['id'] ?>">
                 <div class="input-group my-3">
                     <span class="input-group-text">船種</span>
                     <select class="form-select" name="vessel_category_id" aria-label="vessel_category" required>

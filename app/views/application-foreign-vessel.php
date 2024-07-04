@@ -10,13 +10,14 @@
                         <h4 class="card-title text-light mb-3">國外船舶選擇</h4>
                     </div>
                 </div>
-                <form method="post" action="./?url=create-application-vessel">
-                    <input type="hidden" name="application_id" value="<?= $data['application_id'] ?>">
+                <form method="post" action="./?url=upsert-application-foreign-vessel">
+                    <input type="hidden" name="application_id" value="<?= $data['applicationId'] ?>">
+                    <input type="hidden" name="id" value="<?= $data['vessel']['id'] ?>">
                     <div class="input-group my-3">
                         <select class="form-select" name="foreign_vessel_id" aria-label="Foreign Vessel" required>
                             <option selected disabled>請選擇</option>
                             <?php foreach ($data['vessels'] as $vessel): ?>
-                                <option value="<?= $vessel['id'] ?>"><?= $vessel['name'] ?></option>
+                                <option value="<?= $vessel['id'] ?>" <?= $data['vessel']['foreign_vessel_id'] == $vessel['id'] ? 'selected' : '' ?>><?= $vessel['name'] ?></option>
                             <?php endforeach; ?>
                         </select>
                         <button type="submit" class="btn btn-success ms-1"><i class="bi bi-cursor-fill"></i> 提交</button>
