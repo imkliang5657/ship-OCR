@@ -14,14 +14,15 @@ class Api
             'page/domestic-vessel-information' => ['PageController', 'domesticVesselInformation'],
             'page/vessel-application-dashboard' => ['PageController', 'vesselApplicationDashboard'],
 
-            'page/application-manage' => ['ApplicationController', 'applicationManage'],
-            'page/application-stage' => ['ApplicationController', 'applicationStage'],
+            'page/application-manage' => ['ApplicationController', 'showApplicationManage'],
             'page/application-case' => ['ApplicationController', 'showApplication'],
             'upsert-application-case' => ['ApplicationController', 'upsertApplicationCase'],
             'page/application-requirement' => ['ApplicationController', 'showApplicationRequirement'],
             'upsert-requirement' => ['ApplicationController', 'upsertRequirement'],
             'page/application-foreign-vessel' => ['ApplicationController', 'showApplicationForeignVessel'],
             'upsert-application-foreign-vessel' => ['ApplicationController', 'upsertApplicationVessel'],
+            'page/application-content' => ['ApplicationController', 'showApplicationContent'],
+            'application-stage' => ['ApplicationController', 'applicationStage'],
 
             'page/wind-farm-new-form' => ['WindFarmController', 'windFarmNewForm'],
             'page/wind-farm' => ['WindFarmController', 'windFarm'],

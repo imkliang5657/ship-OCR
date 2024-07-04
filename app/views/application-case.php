@@ -2,6 +2,7 @@
 <body class="text-white" style="background-color: #1F2634">
 <?php require APP_ROOT . 'views/components/userNavBar.php'; ?>
 <div class="container my-5">
+    <?php require APP_ROOT . 'views/components/application-stage.php'; ?>
     <div class="row mt-2">
         <div class="col-sm-5 mb-4 mb-sm-4">
             <div class="card p-2" style="background-color: #2A3041">

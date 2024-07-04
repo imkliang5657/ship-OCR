@@ -48,7 +48,7 @@ class WindFarmController extends Controller
         $postData = $this->retrievePostData();
         if ($postData['id']) {
             $information = $this->windFarm->getById($postData['id']);
-            if (isset($information)) {
+            if ($information) {
                 $this->windFarmInformation->update($postData);
             }
         } else {

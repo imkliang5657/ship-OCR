@@ -23,7 +23,7 @@
                             <td><?= $i ?></td>
                             <td> <?= $application['id'] ?> </td>
                             <td><?= $application['status']?></td>
-                            <td><a href="./?url=page/application-stage&id=<?= $application['id'] ?>" class="btn btn-primary">修改</a></td>
+                            <td><a href="./?url=application-stage&id=<?= $application['id'] ?>" class="btn btn-primary">修改</a></td>
                         </tr>
                         <?php $i++; ?>
                     <?php endforeach; ?>
@@ -32,6 +32,5 @@
         </div>
     </div>
 </div>
-<script src="./js/datepicker.js"></script>
 <?php require APP_ROOT . 'views/include/footer.php'; ?>
 </body>

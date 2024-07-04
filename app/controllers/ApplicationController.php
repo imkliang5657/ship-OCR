@@ -33,8 +33,26 @@ class ApplicationController extends Controller
         return $rule[$status];
     }
 
+    private function getButtons(int $applicationId, int $page): array
+    {
+        $submitted = $this->application->getById($applicationId)['status'] !== 'edited';
+        $styles = array_fill(0, 4, 'secondary');
+        $styles[$page] = 'primary';
+        return [
+            'style' => $submitted ? array_fill(0, 4, 'danger') : $styles,
+            'disabled' => array_map(fn($disabled) => $disabled ? 'disabled' : '',
+                $submitted ? array_fill(0, 4, true) : [
+                    false,
+                    $this->applicationVesselRequirement->getByApplicationId($applicationId) === false,
+                    $this->applicationForeignVessel->getByApplicationId($applicationId) === false,
+                    $this->applicationForeignVessel->getByApplicationId($applicationId) === false,
+                ]
+            ),
+        ];
+    }
+
     // 申請案管理頁面
-    public function applicationManage(): void
+    public function showApplicationManage(): void
     {
         $applications = $this->application->getAll();
         $applications = array_map(function ($item) {
@@ -49,6 +67,7 @@ class ApplicationController extends Controller
     {
         $getData = $this->retrieveGetData();
         $this->view('application-case', [
+            'buttons' => $this->getButtons($getData['id'], 0),
             'windFarms' => $this->model('WindFarm')->getAll(),
             'vesselCategories' => $this->model('VesselCategory')->getAll(),
             'applicationId' => $getData['id'],
@@ -78,6 +97,7 @@ class ApplicationController extends Controller
         } else {
             $vesselDetailId = $this->applicationVesselRequirement->getByApplicationId($getData['id'])['vessel_detail_id'];
             $this->view('application-requirement', [
+                'buttons' => $this->getButtons($getData['id'], 1),
                 'applicationId' => $getData['id'],
                 'columns' => $columns,
                 'vesselDetail' => $vesselDetailId ? $this->vesselDetail->getById($vesselDetailId) : null,
@@ -105,7 +125,12 @@ class ApplicationController extends Controller
         $vesselCategoryId = $this->applicationInformation->getByApplicationId($getData['id'])['vessel_category_id'];
         $vessels = $this->vessel->getByVesselCategoryId($vesselCategoryId);
         $vessel = $this->applicationForeignVessel->getByApplicationId($getData['id']);
-        $this->view('application-foreign-vessel', ['applicationId' => $getData['id'], 'vessels' => $vessels, 'vessel' => $vessel]);
+        $this->view('application-foreign-vessel', [
+            'buttons' => $this->getButtons($getData['id'], 2),
+            'applicationId' => $getData['id'],
+            'vessels' => $vessels,
+            'vessel' => $vessel,
+        ]);
     }
 
     // 處理國外船舶資料
@@ -120,18 +145,27 @@ class ApplicationController extends Controller
         $this->redirect('./?url=page/application-manage');
     }
 
+    public function showApplicationContent(): void
+    {
+        $getData = $this->retrieveGetData();
+        // TODO: 顯示先前填過的所有資訊
+        $this->view('./?url=page/application-content&id=' . $getData['id'], ['buttons' => $this->getButtons($getData['id'], 3)]);
+    }
+
     // 填表階段頁面
     public function applicationStage(): void
     {
         $getData = $this->retrieveGetData();
-        if ($this->applicationForeignVessel->getByApplicationId($getData['id'])) {
+        if ($this->application->getById($getData['id'])['status'] !== 'edited') {
+            $this->showApplicationContent();
+        } elseif ($this->applicationForeignVessel->getByApplicationId($getData['id'])) {
             $this->showApplicationForeignVessel();
         } elseif ($this->applicationVesselRequirement->getByApplicationId($getData['id'])) {
             $this->showApplicationRequirement();
         } elseif ($this->applicationInformation->getByApplicationId($getData['id'])) {
             $this->showApplication();
         } else {    // id 錯誤
-            $this->applicationManage();
+            $this->showApplicationManage();
         }
     }
 }
