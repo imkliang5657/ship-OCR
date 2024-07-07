@@ -84,5 +84,20 @@ class Application
         $this->db->bind(':description', $data['description']);
         $this->db->execute();
     }
+    public function statuschange($status ,$id):void
+    {
+        $query = <<<SQL
+        UPDATE
+            `applications`
+        SET
+            `status`=:status
+        WHERE
+            `id`=:id
+        SQL;
+        $this->db->query($query);
+        $this->db->bind(':id', $id);
+        $this->db->bind(':status', $status);
+        $this->db->execute();
+    }
 }
 

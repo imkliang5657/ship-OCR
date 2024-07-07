@@ -145,7 +145,7 @@ class ApplicationController extends Controller
         } else {
             $this->applicationForeignVessel->create($postData);
         }
-        $this->redirect('./?url=page/application-manage');
+        $this->redirect('./?url=page/application-content');
     }
 
       // 顯示先前填過的所有資訊
@@ -173,6 +173,13 @@ class ApplicationController extends Controller
          'vesselDetail' =>$this->vesselDetail->getById($vesselDetailId),
             ]);
     }
+ public function  upsertApplicationContent():void
+ {
+        $getData=$this->retrieveGetData();
+        $this->application->statuschange('submitted',$getData['id']);
+        $this->redirect('./?url=page/application-manage');
+
+ }
 
     // 填表階段頁面
     public function applicationStage(): void
