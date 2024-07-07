@@ -10,7 +10,7 @@
             <a href="./?url=page/application-foreign-vessel&id=<?= $data['applicationId'] ?>" class="btn btn-<?= $data['buttons']['style'][2] ?> btn-lg <?= $data['buttons']['disabled'][2] ?>" role="button">國外船舶選擇</a>
         </div>
         <div class="col text-center">
-            <a href="./?url=page/application-foreign-vessel&id=<?= $data['applicationId'] ?>" class="btn btn-<?= $data['buttons']['style'][3] ?> btn-lg <?= $data['buttons']['disabled'][3] ?>" role="button">檢視資料</a>
+            <a href="./?url=page/application-content&id=<?= $data['applicationId'] ?>" class="btn btn-<?= $data['buttons']['style'][3] ?> btn-lg <?= $data['buttons']['disabled'][3] ?>" role="button">檢視資料</a>
         </div>
     </div>
 </div>
