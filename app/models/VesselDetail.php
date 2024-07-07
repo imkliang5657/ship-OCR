@@ -4,11 +4,16 @@ class VesselDetail
 {
     private Database $db;
 
-    const MAX_SPEC_COUNT = 7;
+    public const MAX_SPEC_COUNT = 7;
 
     public function __construct()
     {
         $this->db = new Database();
+    }
+
+    public static function columns(): array
+    {
+        return array_map(fn($i) => "specification_$i", range(1, self::MAX_SPEC_COUNT));
     }
 
     public function getAll(): array|bool
@@ -28,7 +33,7 @@ class VesselDetail
 
     public function create(array $data): int
     {
-        $columns = array_map(fn($i) => "specification_$i", range(1, self::MAX_SPEC_COUNT));
+        $columns = self::columns();
         $placeholders = array_map(fn($column) => ':' . $column, $columns);
         $values = array_values(array_intersect_key($data, array_flip($columns)));
         $columnsStr = implode(', ', array_map(fn($column) => "`$column`", $columns));
@@ -53,7 +58,7 @@ class VesselDetail
 
     public function update(array $data): void
     {
-        $columns = array_map(fn($i) => "specification_$i", range(1, self::MAX_SPEC_COUNT));
+        $columns = self::columns();
         $placeholders = array_map(fn($column) => ':' . $column, $columns);
         $values = array_values(array_intersect_key($data, array_flip($columns)));
         $combinedStr =  implode(', ', array_map(fn($column, $placeholder) => "`$column`=$placeholder", $columns, $placeholders));

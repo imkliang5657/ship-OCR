@@ -7,20 +7,20 @@ class WindFarmController extends Controller
 
     public function __construct()
     {
-        $this->windFarm = $this->model('WindFarm');
+        $this->windFarm = $this->model('windFarm');
         $this->windFarmInformation = $this->model('WindFarmInformation');
     }
 
     public function windFarm(): void
     {
-        $this->view('wind-farm', ['windFarms' => $this->model('WindFarm')->getAll()]);
+        $this->view('wind-farm', ['windFarms' => $this->model('windFarm')->getAll()]);
     }
 
     public function windFarmNewForm()
     {
         $getData = $this->retrieveGetData();
         if (isset($getData['id'])) {
-            $windFarm = $this->model('WindFarm')->getByid($getData['id']);
+            $windFarm = $this->model('windFarm')->getByid($getData['id']);
             $this->view('wind-farm-new-form', ['windFarm' => $windFarm, 'id' => $getData['id']]);
         } else {
             $this->redirect('./?url=page/wind-farm');
@@ -31,11 +31,11 @@ class WindFarmController extends Controller
     {
         $getData = $this->retrieveGetData();
         if (isset($getData['id'])) {
-            $windFarm = $this->model('WindFarm')->getByid($getData['id']);
+            $windFarm = $this->model('windFarm')->getByid($getData['id']);
             $this->view('wind-farm-information', [
                 'windFarm' => $windFarm,
                 'windFarmInformation' => $this->model('WindFarmInformation')->getByWindFarmId($windFarm['id']),
-                'vesselCategories' => $this->model('VesselCategory')->getAll(),
+                'vesselCategories' => $this->model('vesselCategory')->getAll(),
                 'id' => $getData['id']
             ]);
         } else {

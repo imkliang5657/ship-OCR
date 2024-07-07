@@ -84,16 +84,52 @@ class Application
         $this->db->bind(':description', $data['description']);
         $this->db->execute();
     }
-    public function statuschange($status ,$id):void
+
+    public function getFullDataById(int $id): array|bool
     {
+        $vdColumnStr = implode(', ', array_map(fn($column) => "vd.$column", VesselDetail::columns()));
         $query = <<<SQL
-        UPDATE
-            `applications`
-        SET
-            `status`=:status
-        WHERE
-            `id`=:id
+            SELECT 
+                a.id, a.status, 
+                u.name AS applicant_name,
+                ai.work_item,
+                ai.description,
+                ai.required_sailing_date,
+                ai.required_return_date,
+                wf.name AS wind_farm_name,
+                vc.id AS vessel_category_id,
+                vc.vessel_category_name AS vessel_category_name,
+                $vdColumnStr,
+                v.name AS vessel_name
+            FROM 
+                applications a
+            JOIN
+                users u ON u.id = a.applicant_id
+            JOIN
+                application_informations ai ON a.id = ai.application_id
+            JOIN
+                wind_farms wf ON wf.id = ai.wind_farm_id
+            JOIN
+                vessel_categories vc ON vc.id = ai.vessel_category_id
+            JOIN 
+                application_vessel_requirements avr ON a.id = avr.application_id
+            JOIN 
+                vessel_details vd ON vd.id = avr.vessel_detail_id
+            JOIN 
+                application_foreign_vessel afv ON a.id = afv.application_id
+            JOIN 
+                vessels v ON v.id = afv.foreign_vessel_id
+            WHERE 
+                a.id = :id
         SQL;
+        $this->db->query($query);
+        $this->db->bind(':id', $id);
+        return $this->db->getSingle();
+    }
+
+    public function updateStatus(int $id, string $status):void
+    {
+        $query = 'UPDATE `applications` SET `status`=:status WHERE `id`=:id';
         $this->db->query($query);
         $this->db->bind(':id', $id);
         $this->db->bind(':status', $status);

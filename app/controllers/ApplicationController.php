@@ -8,7 +8,6 @@ class ApplicationController extends Controller
     private ApplicationVesselRequirement $applicationVesselRequirement;
     private Vessel $vessel;
     private VesselDetail $vesselDetail;
-    
     private WindFarm $windFarm;
 
     public function __construct()
@@ -36,9 +35,9 @@ class ApplicationController extends Controller
         return $rule[$status];
     }
 
-    private function getButtons(?int $applicationId , int $page):  array
+    private function getButtons(?int $applicationId, int $page): array
     {
-        $submitted = $this->application->getById($applicationId)['status'] !== 'edited';
+        $submitted = isset($applicationId) && $this->application->getById($applicationId)['status'] !== 'edited';
         $styles = array_fill(0, 4, 'secondary');
         $styles[$page] = 'primary';
         return [
@@ -46,9 +45,9 @@ class ApplicationController extends Controller
             'disabled' => array_map(fn($disabled) => $disabled ? 'disabled' : '',
                 $submitted ? array_fill(0, 4, true) : [
                     false,
-                    $this->applicationVesselRequirement->getByApplicationId($applicationId) === false,
-                    $this->applicationForeignVessel->getByApplicationId($applicationId) === false,
-                    $this->applicationForeignVessel->getByApplicationId($applicationId) === false,
+                    is_null($applicationId) || $this->applicationInformation->getByApplicationId($applicationId) === false,
+                    is_null($applicationId) || $this->applicationVesselRequirement->getByApplicationId($applicationId) === false,
+                    is_null($applicationId) || $this->applicationForeignVessel->getByApplicationId($applicationId) === false,
                 ]
             ),
         ];
@@ -70,9 +69,9 @@ class ApplicationController extends Controller
     {
         $getData = $this->retrieveGetData();
         $this->view('application-case', [
-            'buttons' => $this->getButtons($getData['id'] , 0),
-            'windFarms' => $this->model('WindFarm')->getAll(),
-            'vesselCategories' => $this->model('VesselCategory')->getAll(),
+            'buttons' => $this->getButtons($getData['id'], 0),
+            'windFarms' => $this->model('windFarm')->getAll(),
+            'vesselCategories' => $this->model('vesselCategory')->getAll(),
             'applicationId' => $getData['id'],
             'applicationInformation' => $getData['id'] ? $this->applicationInformation->getByApplicationId($getData['id']) : null,
         ]);
@@ -115,7 +114,7 @@ class ApplicationController extends Controller
         if ($this->applicationVesselRequirement->getByApplicationId($postData['application_id'])) {
             $this->vesselDetail->update($postData);
         } else {
-            $postData['id'] = $this->vesselDetail->create($postData);
+            $postData['vessel_detail_id'] = $this->vesselDetail->create($postData);
             $this->applicationVesselRequirement->create($postData);
         }
         $this->redirect('./?url=page/application-foreign-vessel&id=' . $postData['application_id']);
@@ -145,56 +144,41 @@ class ApplicationController extends Controller
         } else {
             $this->applicationForeignVessel->create($postData);
         }
-        $this->redirect('./?url=page/application-content');
+        $this->redirect('./?url=page/application-content&id=' . $postData['application_id']);
     }
 
-      // 顯示先前填過的所有資訊
+    // 顯示先前填過的所有資訊
     public function showApplicationContent(): void
     {
         $getData = $this->retrieveGetData();
-        $Vessel=$this->applicationForeignVessel->getByApplicationId($getData['id']);
-        $VesselName=$this->vessel->getById($Vessel['foreign_vessel_id']);
-        $Requirement=$this->applicationVesselRequirement->getByApplicationId($getData['id']);
-        $Information=$this->applicationInformation->getByApplicationId($getData['id']);
-        $WindFarm=$this->windFarm->getById($Information['wind_farm_id']);
-        $vesselCategoryId = $this->model('VesselCategory')->getbyId($Information['vessel_category_id']);
-        $columns = Utils::convertEnglishToChineseForSpecificationColumns($Information['vessel_category_id']);
-        $vesselDetailId = $Requirement['vessel_detail_id'];
-        
-        $this->view('application-check',
-         ['buttons' => $this->getButtons($getData['id'], 3),
-         'applicationId' => $getData['id'],
-         'Information' => $Information ,
-         'Requirement' => $Requirement ,
-         'Vessel'=>$VesselName,
-         'VesselCategory' =>$vesselCategoryId,
-         'WindFarm' =>$WindFarm,
-         'columns' =>$columns,
-         'vesselDetail' =>$this->vesselDetail->getById($vesselDetailId),
-            ]);
+        $data = $this->application->getFullDataById($getData['id']);
+        $columns = Utils::convertEnglishToChineseForSpecificationColumns($data['vessel_category_id']);
+        $this->view('application-content', [
+            'buttons' => $this->getButtons($getData['id'], 3),
+            'application' => $data,
+            'columns' => $columns,
+        ]);
     }
- public function  upsertApplicationContent():void
- {
-        $getData=$this->retrieveGetData();
-        $this->application->statuschange('submitted',$getData['id']);
-        $this->redirect('./?url=page/application-manage');
 
- }
+    public function upsertApplicationContent(): void
+    {
+        $getData = $this->retrieveGetData();
+        $this->application->updateStatus($getData['id'], 'submitted');
+        $this->redirect('./?url=page/application-manage');
+    }
 
     // 填表階段頁面
     public function applicationStage(): void
     {
         $getData = $this->retrieveGetData();
-        if ($this->application->getById($getData['id'])['status'] !== 'edited') {
+        if ($this->applicationForeignVessel->getByApplicationId($getData['id'])) {
             $this->showApplicationContent();
-        } elseif ($this->applicationForeignVessel->getByApplicationId($getData['id'])) {
-            $this->showApplicationForeignVessel();
         } elseif ($this->applicationVesselRequirement->getByApplicationId($getData['id'])) {
-            $this->showApplicationRequirement();
+            $this->showApplicationForeignVessel();
         } elseif ($this->applicationInformation->getByApplicationId($getData['id'])) {
+            $this->showApplicationRequirement();
+        } else {
             $this->showApplication();
-        } else {    // id 錯誤
-            $this->showApplicationManage();
         }
     }
 }
