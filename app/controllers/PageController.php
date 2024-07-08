@@ -40,23 +40,6 @@ class PageController extends Controller
         $this->view('vessel-application-dashboard');
     }
 
-   
-    
-   /* public function insertApplication() : void{
-        $postData = $this->retrievePostData();
-        if (empty($postData['id'])) {
-            $this->windFarmInformation->create($postData);
-        } else {
-            var_dump('update');
-            $information = $this->windFarm->getById($postData['id']);
-            if (isset($information)) {
-                $this->windFarmInformation->update($postData);
-            }
-            
-        }
-
-    }*/
-
     public function announcement(): void
     {
         $this->view('announcement');

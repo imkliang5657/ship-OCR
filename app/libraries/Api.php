@@ -22,7 +22,7 @@ class Api
             'page/application-foreign-vessel' => ['ApplicationController', 'showApplicationForeignVessel'],
             'upsert-application-foreign-vessel' => ['ApplicationController', 'upsertApplicationVessel'],
             'page/application-content' => ['ApplicationController', 'showApplicationContent'],
-            'upsert-application-content' => ['ApplicationController', 'upsertApplicationContent'],
+            'submit-application-content' => ['ApplicationController', 'submitApplicationContent'],
             'application-stage' => ['ApplicationController', 'applicationStage'],
             
             'page/wind-farm-new-form' => ['WindFarmController', 'windFarmNewForm'],

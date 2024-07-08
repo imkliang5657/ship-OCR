@@ -13,7 +13,7 @@
             </div>
             <form method="post" action="./?url=upsert-application-foreign-vessel">
                 <input type="hidden" name="application_id" value="<?= $data['applicationId'] ?>">
-                <input type="hidden" name="id" value="<?= $data['vessel']['id']??null?>">
+                <input type="hidden" name="id" value="<?= $data['vessel']['id'] ?? null ?>">
                 <div class="input-group my-3">
                     <select class="form-select" name="foreign_vessel_id" aria-label="Foreign Vessel" required>
                         <option selected disabled>請選擇</option>
@@ -21,7 +21,7 @@
                             <option value="<?= $vessel['id'] ?>" <?= $data['vessel']['foreign_vessel_id'] ?? 'null' == $vessel['id'] ? 'selected' : '' ?>><?= $vessel['name'] ?></option>
                         <?php endforeach; ?>
                     </select>
-                    <button type="submit" class="btn btn-success ms-1"><i class="bi bi-cursor-fill"></i> 提交</button>
+                    <button type="submit" class="btn btn-primary ms-1"><i class="bi bi-send"></i> 確認</button>
                 </div>
             </form>
         </div>

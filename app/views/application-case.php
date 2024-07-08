@@ -19,34 +19,34 @@
                             <select class="form-select" name="wind_farm_id" aria-label="wind_farm_id" required>
                                 <option selected disabled></option>
                                 <?php foreach ($data['windFarms'] as $windFarm): ?>
-                                    <option value="<?= $windFarm['id'] ?>" <?= $data['applicationInformation']['wind_farm_id']??null == $windFarm['id'] ? 'selected' : '' ?>><?= $windFarm['name'] ?></option>
+                                    <option value="<?= $windFarm['id'] ?>" <?= $data['applicationInformation']['wind_farm_id'] ?? null == $windFarm['id'] ? 'selected' : '' ?>><?= $windFarm['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">工作項目</span>
-                            <input type="text" class="form-control" name="work_item" value="<?= $data['applicationInformation']['work_item']??null ?>">
+                            <input type="text" class="form-control" name="work_item" value="<?= $data['applicationInformation']['work_item'] ?? null ?>">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">船種</span>
                             <select class="form-select" name="vessel_category_id" aria-label="vessel_category_id" required>
                                 <option selected disabled></option>
                                 <?php foreach ($data['vesselCategories'] as $category): ?>
-                                    <option value="<?= $category['id'] ?>" <?= $data['applicationInformation']['vessel_category_id']??null == $category['id'] ? 'selected' : '' ?>><?= $category['vessel_category_name'] ?></option>
+                                    <option value="<?= $category['id'] ?>" <?= $data['applicationInformation']['vessel_category_id'] ?? null == $category['id'] ? 'selected' : '' ?>><?= $category['vessel_category_name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">使用船期</span>
-                            <input type="text" class="form-control datepicker" name="required_sailing_date" value="<?= $data['applicationInformation']['required_sailing_date']??null ?>">
+                            <input type="text" class="form-control datepicker" name="required_sailing_date" value="<?= $data['applicationInformation']['required_sailing_date'] ?? null ?>">
                             <span class="input-group-text">至</span>
-                            <input type="text" class="form-control datepicker" name="required_return_date" value="<?= $data['applicationInformation']['required_return_date']??null ?>">
+                            <input type="text" class="form-control datepicker" name="required_return_date" value="<?= $data['applicationInformation']['required_return_date'] ?? null ?>">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">描述</span>
-                            <textarea class="form-control" rows="10" aria-label="With textarea" name="description"><?= $data['applicationInformation']['description']??null ?></textarea>
+                            <textarea class="form-control" rows="10" aria-label="With textarea" name="description"><?= $data['applicationInformation']['description'] ?? null ?></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i> 提交</button>
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i> 確認</button>
                     </div>
                 </form>
             </div>

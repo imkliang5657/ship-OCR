@@ -4,7 +4,7 @@
 <div class="container my-5">
     <div class="card">
         <div class="card-header">
-            <a href="./?url=page/application-case" class="btn btn-primary" role="button">新增申請案</a>
+            <a href="./?url=page/application-case" class="btn btn-primary" role="button"><i class="bi bi-plus-lg"></i> 新增申請案</a>
         </div>
         <div class="card-body">
             <table class="table table-striped">
@@ -22,8 +22,13 @@
                         <tr>
                             <td><?= $i ?></td>
                             <td> <?= $application['id'] ?> </td>
-                            <td><?= $application['status']?></td>
-                            <td><a href="./?url=application-stage&id=<?= $application['id'] ?>" class="btn btn-primary">修改</a></td>
+                            <td><?= $application['statusText']?></td>
+                            <td>
+                                <a href="./?url=application-stage&id=<?= $application['id'] ?>" class="btn btn-primary">
+                                    <i class="bi bi-<?= $application['status'] == 'edited' ? 'pencil-square' : 'eye-fill' ?>"></i>
+                                    <?= $application['status'] == 'edited' ? '編輯' : '檢視' ?>
+                                </a>
+                            </td>
                         </tr>
                         <?php $i++; ?>
                     <?php endforeach; ?>
