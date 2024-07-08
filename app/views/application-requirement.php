@@ -20,7 +20,7 @@
                 <div class="input-group my-3">
                     <span class="input-group-text" style="width: 15%;"><?= $column ?></span>
                     <span class="input-group-text">為</span>
-                    <input type="text" class="form-control" name="specification_<?= $index + 1 ?>" value="<?= $data['vesselDetail']['specification_' . $index + 1] ?>">
+                    <input type="text" class="form-control" name="specification_<?= $index + 1 ?>" value="<?= $data['vesselDetail']['specification_' . $index + 1]??null ?>">
                 </div>
             <?php endforeach; ?>
             <button type="submit" class="btn btn-success ms-1"><i class="bi bi-cursor-fill"></i> 提交</button>

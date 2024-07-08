@@ -8,7 +8,7 @@ class ApplicationController extends Controller
     private ApplicationVesselRequirement $applicationVesselRequirement;
     private Vessel $vessel;
     private VesselDetail $vesselDetail;
-    private WindFarm $windFarm;
+    
 
     public function __construct()
     {
@@ -18,7 +18,7 @@ class ApplicationController extends Controller
         $this->applicationVesselRequirement = $this->model('ApplicationVesselRequirement');
         $this->vessel = $this->model('Vessel');
         $this->vesselDetail = $this->model('VesselDetail');
-        $this->windFarm = $this->model('WindFarm');
+        
     }
 
     private function convertStatusFromEnglishToChinese(string $status): string
@@ -69,11 +69,11 @@ class ApplicationController extends Controller
     {
         $getData = $this->retrieveGetData();
         $this->view('application-case', [
-            'buttons' => $this->getButtons($getData['id'], 0),
+            'buttons' => $this->getButtons($getData['id']??null, 0),
             'windFarms' => $this->model('windFarm')->getAll(),
             'vesselCategories' => $this->model('vesselCategory')->getAll(),
-            'applicationId' => $getData['id'],
-            'applicationInformation' => $getData['id'] ? $this->applicationInformation->getByApplicationId($getData['id']) : null,
+            'applicationId' => $getData['id']??null,
+            'applicationInformation' => $getData['id']??null ? $this->applicationInformation->getByApplicationId($getData['id']) : null,
         ]);
     }
 
@@ -97,7 +97,7 @@ class ApplicationController extends Controller
         if (is_null($columns)) {
             $this->showApplicationForeignVessel();
         } else {
-            $vesselDetailId = $this->applicationVesselRequirement->getByApplicationId($getData['id'])['vessel_detail_id'];
+            $vesselDetailId = $this->applicationVesselRequirement->getByApplicationId($getData['id'])['vessel_detail_id']??null;
             $this->view('application-requirement', [
                 'buttons' => $this->getButtons($getData['id'], 1),
                 'applicationId' => $getData['id'],
@@ -126,12 +126,16 @@ class ApplicationController extends Controller
         $getData = $this->retrieveGetData();
         $vesselCategoryId = $this->applicationInformation->getByApplicationId($getData['id'])['vessel_category_id'];
         $vessels = $this->vessel->getByVesselCategoryId($vesselCategoryId);
-        $vessel = $this->applicationForeignVessel->getByApplicationId($getData['id']);
+        $vessel = $this->applicationForeignVessel->getByApplicationId($getData['id']) ;
+        // $vessel['id']??null;
+        // $vessel['foreign-vessel_id']??null;
+        // var_dump($vessel);
+        // die();
         $this->view('application-foreign-vessel', [
             'buttons' => $this->getButtons($getData['id'], 2),
             'applicationId' => $getData['id'],
             'vessels' => $vessels,
-            'vessel' => $vessel,
+            'vessel' => $vessel ,
         ]);
     }
 
@@ -139,11 +143,14 @@ class ApplicationController extends Controller
     public function upsertApplicationVessel(): void
     {
         $postData = $this->retrievePostData();
-        if ($postData['id']) {
+        
+       
+        if ($postData['id']!=NULL) {
             $this->applicationForeignVessel->update($postData);
         } else {
             $this->applicationForeignVessel->create($postData);
         }
+       
         $this->redirect('./?url=page/application-content&id=' . $postData['application_id']);
     }
 
@@ -151,12 +158,19 @@ class ApplicationController extends Controller
     public function showApplicationContent(): void
     {
         $getData = $this->retrieveGetData();
+        if($this->application->getById($getData['id'])['status']=="edited"){
+            $display="block";
+        }else{
+            $display="none";
+        }
         $data = $this->application->getFullDataById($getData['id']);
+       
         $columns = Utils::convertEnglishToChineseForSpecificationColumns($data['vessel_category_id']);
         $this->view('application-content', [
             'buttons' => $this->getButtons($getData['id'], 3),
             'application' => $data,
             'columns' => $columns,
+            'display' => $display
         ]);
     }
 

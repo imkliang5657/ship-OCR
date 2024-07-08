@@ -71,7 +71,7 @@
                         </td>
                     </tr>
                 </table>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <button type="button" class="btn btn-primary" style="display:<?=$data['display']?> " data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     確認送出
                 </button>
 
