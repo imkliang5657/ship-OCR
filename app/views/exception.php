@@ -1,6 +1,6 @@
 <?php require APP_ROOT . 'views/include/header.php'; ?>
 <?php require APP_ROOT . 'views/components/publicNavBar.php'; ?>
-<body class="text-white" style="background-color: #1F2634">
+<body>
 <div class="container my-5">
     <div class="row mt-2">
         <div class="col-sm-12">

@@ -1,5 +1,5 @@
 <?php require APP_ROOT . 'views/include/header.php'; ?>
-<body class="text-white" style="background-color: #1F2634">
+<body>
 <?php require APP_ROOT . 'views/components/userNavBar.php'; ?>
 <div class="container my-5">
     <div class="card">

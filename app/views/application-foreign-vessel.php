@@ -1,14 +1,14 @@
 <?php require APP_ROOT . 'views/include/header.php'; ?>
 
-<body class="text-white" style="background-color: #1F2634">
+<body>
 <?php require APP_ROOT . 'views/components/userNavBar.php'; ?>
 <div class="container my-5 ">
     <?php require APP_ROOT . 'views/components/application-stage.php'; ?>
-    <div class="card p-2" style="background-color: #2A3041">
+    <div class="card p-2">
         <div class="card-body">
             <div class="row">
                 <div class="col-5">
-                    <h4 class="card-title text-light mb-3">國外船舶選擇</h4>
+                    <h4 class="card-title mb-3">國外船舶選擇</h4>
                 </div>
             </div>
             <form method="post" action="./?url=upsert-application-foreign-vessel">

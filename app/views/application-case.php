@@ -1,17 +1,17 @@
 <?php require APP_ROOT . 'views/include/header.php'; ?>
-<body class="text-white" style="background-color: #1F2634">
+<body>
 <?php require APP_ROOT . 'views/components/userNavBar.php'; ?>
 <div class="container my-5">
     <?php require APP_ROOT . 'views/components/application-stage.php'; ?>
     <div class="row mt-2">
         <div class="col-sm-5 mb-4 mb-sm-4">
-            <div class="card p-2" style="background-color: #2A3041">
-                <form method="post" action="./?url=upsert-application-case">
+            <div class="card p-2">
+                <form method="post" action="./?url=upsert-application-case" id="form">
                     <input type="hidden" name="application_id" value="<?= $data['applicationId'] ?>">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-5">
-                                <h4 class="card-title text-light mb-3">基本資料</h4>
+                                <h4 class="card-title mb-3">基本資料</h4>
                             </div>
                         </div>
                         <div class="input-group my-3">
@@ -38,9 +38,9 @@
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">使用船期</span>
-                            <input type="text" class="form-control datepicker" name="required_sailing_date" value="<?= $data['applicationInformation']['required_sailing_date'] ?? null ?>">
+                            <input type="text" id="required_sailing_date" class="form-control datepicker" name="required_sailing_date" value="<?= $data['applicationInformation']['required_sailing_date'] ?? null ?>">
                             <span class="input-group-text">至</span>
-                            <input type="text" class="form-control datepicker" name="required_return_date" value="<?= $data['applicationInformation']['required_return_date'] ?? null ?>">
+                            <input type="text" id="required_return_date" class="form-control datepicker" name="required_return_date" value="<?= $data['applicationInformation']['required_return_date'] ?? null ?>">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">描述</span>
@@ -54,5 +54,17 @@
     </div>
 </div>
 <script src="./js/datepicker.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#form').submit(function(event) {
+            const beginDate = new Date($('#required_sailing_date').val());
+            const endDate = new Date($('#required_return_date').val());
+            if (endDate < beginDate) {
+                alert('使用船期之結束日期不得早於開始日期');
+                event.preventDefault();
+            }
+        });
+    });
+</script>
 <?php require APP_ROOT . 'views/include/footer.php'; ?>
 </body>

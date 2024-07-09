@@ -1,12 +1,12 @@
 <?php require APP_ROOT . 'views/include/header.php'; ?>
-<body class="text-white" style="background-color: #1F2634">
+<body>
 <?php require APP_ROOT . 'views/components/userNavBar.php'; ?>
 <div class="container m-5">
     <?php require APP_ROOT . 'views/components/application-stage.php'; ?>
     <div class="card-head">
         <div class="row">
             <div class="col-3">
-                <h4 class="card-title text-light mb-3">
+                <h4 class="card-title mb-3">
                     需求規格
                 </h4>
             </div>

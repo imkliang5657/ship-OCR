@@ -1,6 +1,6 @@
 <?php
 echo <<<HTML
-<nav class="navbar navbar-expand-lg border-bottom border-body" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg border-bottom border-body">
     <div class="container-fluid">
       <span class="navbar-brand mb-0 ps-4 fw-bold">
         <i class="bi bi-tsunami"></i> 離岸風電海事工程船舶資料庫

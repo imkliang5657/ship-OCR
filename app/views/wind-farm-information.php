@@ -1,5 +1,5 @@
 <?php require APP_ROOT . 'views/include/header.php'; ?>
-<body class="text-white" style="background-color: #1F2634">
+<body>
 <?php require APP_ROOT . 'views/components/userNavBar.php'; ?>
 <div class="container my-5">
     <a href="./?url=page/wind-farm-new-form&id=<?= $data['id'] ?>" class="btn btn-primary">前往新增</a>

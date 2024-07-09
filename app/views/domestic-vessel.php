@@ -1,12 +1,12 @@
 <?php require APP_ROOT . 'views/include/header.php'; ?>
-<body class="text-white" style="background-color: #1F2634">
+<body>
 <?php require APP_ROOT . 'views/components/userNavBar.php'; ?>
 <div class="container my-5">
     <div class="row">
         <div class="col-sm-12 mb-3 mb-sm-4">
-            <div class="card p-2" style="background-color: #353A4A">
+            <div class="card p-2">
                 <div class="card-body">
-                    <h3 class="card-title text-light mb-4">國內船舶資訊</h3>
+                    <h3 class="card-title mb-4">國內船舶資訊</h3>
                     <table class="table table-bordered mt-3">
                         <thead>
                         <tr>

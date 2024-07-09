@@ -4,12 +4,12 @@
         width: 25%;
     }
 </style>
-<body class="text-white" style="background-color: #1F2634">
+<body>
 <?php require APP_ROOT . 'views/components/userNavBar.php'; ?>
 <div class="container-sm my-5">
     <?php require APP_ROOT . 'views/components/application-stage.php'; ?>
     <div class="row m-5">
-        <div class="card p-2" style="background-color: #2A3041">
+        <div class="card p-2">
             <div class="card-body">
                 <input type="hidden" name="application_id" value="<?= $data['applicationId'] ?>">
                 <table class="table table-striped table-hover">

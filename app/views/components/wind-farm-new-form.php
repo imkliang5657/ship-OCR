@@ -1,12 +1,12 @@
 <div class="col-sm-5 mb-4 mb-sm-4">
-    <div class="card p-2" style="background-color: #2A3041">
+    <div class="card p-2">
         <div class="card-body">
             <form method="post" action="./?url=upsert-wind-farm-information">
                 <input type="hidden" name="id" value="<?= $id ?>">
                 <input type="hidden" name="wind_farm_id" value="<?= $data['windFarm']['id'] ?>">
                 <div class="row">
                     <div class="col-5">
-                        <h4 class="card-title text-light mb-3">基本資料</h4>
+                        <h4 class="card-title mb-3">基本資料</h4>
                     </div>
                 </div>
                 <div class="input-group my-3">
@@ -38,7 +38,7 @@
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="is_signed-<?= $id ?>" name="is_signed" value="1" <?= $info['is_signed'] ? 'checked' : '' ?>>
-                    <label class="form-check-label text-light" for="is_signed-<?= $id ?>">已簽約</label>
+                    <label class="form-check-label" for="is_signed-<?= $id ?>">已簽約</label>
                 </div>
                 <div class="btn-group" role="group" aria-label="submit">
                     <?php if (empty($id)): ?>

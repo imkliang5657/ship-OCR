@@ -1,7 +1,7 @@
 <div class="container my-5">
     <div class="row justify-content-between">
         <div class="col text-center">
-            <a href="./?url=page/application-manage" class="btn btn-outline-light btn-lg" role="button"><i class="bi bi-box-arrow-left"></i> 管理頁面</a>
+            <a href="./?url=page/application-manage" class="btn btn-outline-secondary btn-lg" role="button"><i class="bi bi-box-arrow-left"></i> 管理頁面</a>
         </div>
         <div class="col text-center">
             <a href="./?url=page/application-case&id=<?= $data['applicationId'] ?? '' ?>" class="btn btn-<?= $data['buttons']['style'][0] ?> btn-lg <?= $data['buttons']['disabled'][0] ?>" role="button">風場基本資料</a>
