@@ -14,6 +14,7 @@ class ApplicationController extends Controller
 
     public function __construct()
     {
+        $_SESSION['applicant_id']=1;
         $this->application = $this->model('Application');
         $this->applicationInformation = $this->model('ApplicationInformation');
         $this->applicationForeignVessel = $this->model('ApplicationForeignVessel');
@@ -59,12 +60,17 @@ class ApplicationController extends Controller
     // 申請案管理頁面
     public function showApplicationManage(): void
     {
-        $applications = $this->application->getAll();
+        $applications = $this->application->getAllByApplicantId($_SESSION['applicant_id']);
         $applications = array_map(function ($item) {
             $item['statusText'] = $this->convertStatusFromEnglishToChinese($item['status']);
             return $item;
         }, $applications);
-        $this->view('application-manage', ['applications' => $applications]);
+        $applications = array_map(function ($item) {
+            $item['vessel_id']= $this->applicationForeignVessel->getByApplicationId($item['id'])['foreign_vessel_id']??null;
+            $item['vesselname'] =$item['vessel_id'] ? $this->vessel->getById($item['vessel_id'])['name']:'無';
+            return $item;
+        }, $applications);
+        $this->view('application-manage', ['applications' => $applications,]);
     }
 
     // 風場資料頁面
@@ -86,7 +92,7 @@ class ApplicationController extends Controller
         if ($applicationId = $postData['application_id']) {
             $this->application->update($postData);
         } else {
-            $applicationId = $this->application->create($postData);
+            $applicationId = $this->application->create($postData,$_SESSION['applicant_id']);
         }
         $this->redirect('./?url=page/application-requirement&id=' . $applicationId);
     }

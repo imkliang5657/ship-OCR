@@ -9,10 +9,11 @@ class Application
         $this->db = new Database();
     }
 
-    public function getAll(): array|bool
+    public function getAllByApplicantId($applicant_id): array|bool
     {
-        $query = 'SELECT * FROM `applications`';
+        $query = 'SELECT * FROM `applications` WHERE `applicant_id`=:applicant_id';
         $this->db->query($query);
+        $this->db->bind(':applicant_id', $applicant_id);
         return $this->db->getAll();
     }
 
@@ -24,11 +25,11 @@ class Application
         return $this->db->getSingle();
     }
 
-    public function create(array $data): int
+    public function create(array $data ,int $applicant_id): int
     {
-        $_SESSION['id'] = 1;
+        //$_SESSION['id'] = 1;
         $query = <<<SQL
-            INSERT INTO `applications`(`applicant_id`) VALUES ({$_SESSION['id']})
+            INSERT INTO `applications`(`applicant_id`) VALUES ({$applicant_id})
         SQL;
         $this->db->query($query);
         $this->db->execute();
