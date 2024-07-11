@@ -2,7 +2,7 @@
     <div class="card p-2">
         <div class="card-body">
             <form method="post" action="./?url=upsert-wind-farm-information">
-                <input type="hidden" name="id" value="<?= $id ?>">
+                <input type="hidden" name="id" value="<?= $id??null ?>">
                 <input type="hidden" name="wind_farm_id" value="<?= $data['windFarm']['id'] ?>">
                 <div class="row">
                     <div class="col-5">
@@ -14,31 +14,31 @@
                     <select class="form-select" name="vessel_category_id" aria-label="vessel_category" required>
                         <option selected disabled></option>
                         <?php foreach ($data['vesselCategories'] as $vesselCategory): ?>
-                            <option value="<?= $vesselCategory['id'] ?>" <?= ($info['vessel_category_id'] == $vesselCategory['id']) ? 'selected' : '' ?>><?= $vesselCategory['name'] ?></option>
+                            <option value="<?= $vesselCategory['id'] ?>" <?= ($info['vessel_category_id']??null == $vesselCategory['id']) ? 'selected' : '' ?>><?= $vesselCategory['vessel_category_name'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">工作項目</span>
-                    <input type="text" class="form-control" name="item" aria-label="item" value="<?= $info['item'] ?>" required>
+                    <input type="text" class="form-control" name="item" aria-label="item" value="<?= $info['item']??null ?>" required>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">使用船期</span>
-                    <input type="text" class="form-control datepicker" name="start_shipment_time" aria-label="start_shipment_time" value="<?= $info['start_shipment_time'] ?>" required>
+                    <input type="text" class="form-control datepicker" name="start_shipment_time" aria-label="start_shipment_time" value="<?= $info['start_shipment_time']??null ?>" required>
                     <span class="input-group-text">至</span>
-                    <input type="text" class="form-control datepicker" name="end_shipment_time" aria-label="end_shipment_time" value="<?= $info['end_shipment_time'] ?>" required>
+                    <input type="text" class="form-control datepicker" name="end_shipment_time" aria-label="end_shipment_time" value="<?= $info['end_shipment_time']??null ?>" required>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">需求規格</span>
-                    <textarea class="form-control" name="detail" rows="10" aria-label="detail" required><?= $info['detail'] ?></textarea>
+                    <textarea class="form-control" name="detail" rows="10" aria-label="detail" required><?= $info['detail']??null ?></textarea>
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text">數量</span>
-                    <input type="number" class="form-control" name="number" aria-label="number" value="<?= $info['number'] ?>" required>
+                    <input type="number" class="form-control" name="number" aria-label="number" value="<?= $info['number']??null ?>" required>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="is_signed-<?= $id ?>" name="is_signed" value="1" <?= $info['is_signed'] ? 'checked' : '' ?>>
-                    <label class="form-check-label" for="is_signed-<?= $id ?>">已簽約</label>
+                    <input class="form-check-input" type="checkbox" id="is_signed-<?= $id??null ?>" name="is_signed" value="1" <?= $info['is_signed']??null ? 'checked' : '' ?>>
+                    <label class="form-check-label" for="is_signed-<?= $id??null ?>">已簽約</label>
                 </div>
                 <div class="btn-group" role="group" aria-label="submit">
                     <?php if (empty($id)): ?>

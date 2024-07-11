@@ -21,7 +21,11 @@ class WindFarmController extends Controller
         $getData = $this->retrieveGetData();
         if (isset($getData['id'])) {
             $windFarm = $this->model('windFarm')->getByid($getData['id']);
-            $this->view('wind-farm-new-form', ['windFarm' => $windFarm, 'id' => $getData['id']]);
+            $this->view('wind-farm-new-form', 
+            ['windFarm' => $windFarm, 
+            'id' => $getData['id'],
+            'vesselCategories' => $this->model('vesselCategory')->getAll()
+        ]);
         } else {
             $this->redirect('./?url=page/wind-farm');
         }
@@ -46,7 +50,7 @@ class WindFarmController extends Controller
     public function upsertInformation(): void
     {
         $postData = $this->retrievePostData();
-        if ($postData['id']) {
+        if ($postData['id']!=NULl) {
             $information = $this->windFarm->getById($postData['id']);
             if ($information) {
                 $this->windFarmInformation->update($postData);

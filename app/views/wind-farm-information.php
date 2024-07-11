@@ -2,10 +2,14 @@
 <body>
 <?php require APP_ROOT . 'views/components/userNavBar.php'; ?>
 <div class="container my-5">
-    <a href="./?url=page/wind-farm-new-form&id=<?= $data['id'] ?>" class="btn btn-primary">前往新增</a>
+<div class="btn-group ">
+    <a href="./?url=page/wind-farm" class="btn  btn-warning">風場列表</a>
+    <a href="./?url=page/wind-farm-new-form&id=<?= $data['id'] ?>" class="btn   btn-primary">前往新增</a>
+</div>
     <p class="fs-2"><?= $data['windFarm']['name'] ?></p>
     <p class="card-text"><?= $data['windFarm']['introduction'] ?></p>
     <div class="row min-vh-100 mt-2" id="form-container">
+        
         <?php foreach ($data['windFarmInformation'] as $info): ?>
             <?php $id = $info['id']; ?>
             <?php require APP_ROOT . 'views/components/wind-farm-new-form.php'; ?>
