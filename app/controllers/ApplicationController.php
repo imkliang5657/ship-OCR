@@ -48,7 +48,7 @@ class ApplicationController extends Controller
             'style' => $submitted ? array_fill(0, 4, 'danger') : $styles,
             'disabled' => array_map(fn($disabled) => $disabled ? 'disabled' : '',
                 $submitted ? array_fill(0, 4, true) : [
-                    false,
+                    !is_null($applicationId)==false,
                     is_null($applicationId) || $this->applicationInformation->getByApplicationId($applicationId) === false,
                     is_null($applicationId) || $this->applicationVesselRequirement->getByApplicationId($applicationId) === false,
                     is_null($applicationId) || $this->applicationForeignVessel->getByApplicationId($applicationId) === false,
