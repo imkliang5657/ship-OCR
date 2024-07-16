@@ -6,7 +6,7 @@
         <div class="col-sm-9 mb-3 mb-sm-4">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title"> 國內風場位置圖</h5>
+                    <h5 class="card-title">國內風場位置圖</h5>
                     <p class="card-text text-secondary">顯示國內各個風場的位置與分佈。</p>
                     <img class="card-img-top" src="./img/wind-farm.png" alt="wind-farm">
                 </div>

@@ -14,7 +14,6 @@ class ApplicationController extends Controller
 
     public function __construct()
     {
-        $_SESSION['applicant_id']=1;
         $this->application = $this->model('Application');
         $this->applicationInformation = $this->model('ApplicationInformation');
         $this->applicationForeignVessel = $this->model('ApplicationForeignVessel');
@@ -48,7 +47,7 @@ class ApplicationController extends Controller
             'style' => $submitted ? array_fill(0, 4, 'danger') : $styles,
             'disabled' => array_map(fn($disabled) => $disabled ? 'disabled' : '',
                 $submitted ? array_fill(0, 4, true) : [
-                    !is_null($applicationId)==false,
+                    is_null($applicationId),
                     is_null($applicationId) || $this->applicationInformation->getByApplicationId($applicationId) === false,
                     is_null($applicationId) || $this->applicationVesselRequirement->getByApplicationId($applicationId) === false,
                     is_null($applicationId) || $this->applicationForeignVessel->getByApplicationId($applicationId) === false,
@@ -60,15 +59,13 @@ class ApplicationController extends Controller
     // 申請案管理頁面
     public function showApplicationManage(): void
     {
-        $applications = $this->application->getAllByApplicantId($_SESSION['applicant_id']);
-        $applications = array_map(function ($item) {
-            $item['statusText'] = $this->convertStatusFromEnglishToChinese($item['status']);
-            return $item;
-        }, $applications);
-        $applications = array_map(function ($item) {
-            $item['vessel_id']= $this->applicationForeignVessel->getByApplicationId($item['id'])['foreign_vessel_id']??null;
-            $item['vesselname'] =$item['vessel_id'] ? $this->vessel->getById($item['vessel_id'])['name']:'無';
-            return $item;
+        $_SESSION['id'] = 1;
+        $applications = $this->application->getAllByApplicantId($_SESSION['id']);
+        $applications = array_map(function ($application) {
+            $vesselId = $this->applicationForeignVessel->getByApplicationId($application['id'])['foreign_vessel_id'] ?? null;
+            $application['vesselName'] = $vesselId ? $this->vessel->getById($vesselId)['name'] : null;
+            $application['statusText'] = $this->convertStatusFromEnglishToChinese($application['status']);
+            return $application;
         }, $applications);
         $this->view('application-manage', ['applications' => $applications,]);
     }
@@ -89,12 +86,13 @@ class ApplicationController extends Controller
     public function upsertApplicationCase(): void
     {
         $postData = $this->retrievePostData();
-        if ($applicationId = $postData['application_id']) {
+        if ($postData['application_id']) {
             $this->application->update($postData);
         } else {
-            $applicationId = $this->application->create($postData,$_SESSION['applicant_id']);
+            $postData['application_id'] = $this->application->create($postData);
+            $this->applicationInformation->create($postData);
         }
-        $this->redirect('./?url=page/application-requirement&id=' . $applicationId);
+        $this->redirect('./?url=page/application-requirement&id=' . $postData['application_id']);
     }
 
     // 需求規格頁面

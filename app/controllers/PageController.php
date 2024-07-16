@@ -20,7 +20,7 @@ class PageController extends Controller
     public function domesticVesselInformation(): void
     {
         $getData = $this->retrieveGetData();
-        $name = match ($getData['vessel_id']) {
+        $name = match ($getData['vesselId']) {
             1 => '翡翠輪',
             2 => '東方海威',
             3 => '台船11號',

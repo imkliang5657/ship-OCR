@@ -9,11 +9,11 @@ class Application
         $this->db = new Database();
     }
 
-    public function getAllByApplicantId($applicant_id): array|bool
+    public function getAllByApplicantId($applicantId): array|bool
     {
         $query = 'SELECT * FROM `applications` WHERE `applicant_id`=:applicant_id';
         $this->db->query($query);
-        $this->db->bind(':applicant_id', $applicant_id);
+        $this->db->bind(':applicant_id', $applicantId);
         return $this->db->getAll();
     }
 
@@ -25,11 +25,11 @@ class Application
         return $this->db->getSingle();
     }
 
-    public function create(array $data ,int $applicant_id): int
+    public function create(array $data): int
     {
-        //$_SESSION['id'] = 1;
+        $_SESSION['id'] = 1;
         $query = <<<SQL
-            INSERT INTO `applications`(`applicant_id`) VALUES ({$applicant_id})
+            INSERT INTO `applications`(`applicant_id`) VALUES ({$_SESSION['id']})
         SQL;
         $this->db->query($query);
         $this->db->execute();
@@ -40,22 +40,6 @@ class Application
         $this->db->query($query);
         $this->db->execute();
         $application = $this->db->getSingle();
-
-        $query = <<<SQL
-            INSERT INTO
-                `application_informations`(`application_id`, `wind_farm_id`, `work_item`, `vessel_category_id`, `required_sailing_date`, `required_return_date`, `description`)
-            VALUES
-                (:application_id, :wind_farm_id, :work_item, :vessel_category_id, :required_sailing_date, :required_return_date, :description)
-        SQL;
-        $this->db->query($query);
-        $this->db->bind(':application_id', $application['id']);
-        $this->db->bind(':wind_farm_id', $data['wind_farm_id']);
-        $this->db->bind(':work_item', $data['work_item']);
-        $this->db->bind(':vessel_category_id', $data['vessel_category_id']);
-        $this->db->bind(':required_sailing_date', $data['required_sailing_date']);
-        $this->db->bind(':required_return_date', $data['required_return_date']);
-        $this->db->bind(':description', $data['description']);
-        $this->db->execute();
 
         return $application['id'];
     }
@@ -128,7 +112,7 @@ class Application
         return $this->db->getSingle();
     }
 
-    public function updateStatus(int $id, string $status):void
+    public function updateStatus(int $id, string $status): void
     {
         $query = 'UPDATE `applications` SET `status`=:status WHERE `id`=:id';
         $this->db->query($query);
